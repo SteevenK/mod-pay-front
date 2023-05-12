@@ -1,14 +1,14 @@
-import InputBox from "./InputBox";
-import PayButton from "./PayButton";
-import AlertMessage from "./AlertMessage";
+import React from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import React from "react";
+import AlertMessage from "./AlertMessage";
+import PayButton from "./PayButton";
+import InputBox from "./InputBox";
 
-//import { useState } from "react";
-//import { useEffect } from "react";
+//  import { useState } from "react";
+//  import { useEffect } from "react";
 
 export default function From() {
   const date = /^(1[0-2]|0[1-9]|\d)\/(20\d{2}|19\d{2}|0(?!0)\d|[1-9]\d)$/;
@@ -16,7 +16,26 @@ export default function From() {
   const amount = /^\d+(.\d{1,2})?$/;
   const cardNumber =
     /^(4[0-9]{12}(?:[0-9]{3})?$)|(^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$)|(3[47][0-9]{13})|(^3(?:0[0-5]|[68][0-9])[0-9]{11}$)|(^6(?:011|5[0-9]{2})[0-9]{12}$)|(^(?:2131|1800|35\d{3})\d{11})$/;
-  const schema = yup.object().shape({
+  const schema: yup.ObjectSchema<
+    {
+      email: string;
+      cardNumber: string;
+      expirationDate: string;
+      cvc: string;
+      name: string;
+      amount: string;
+    },
+    yup.AnyObject,
+    {
+      email: undefined;
+      cardNumber: undefined;
+      expirationDate: undefined;
+      cvc: undefined;
+      name: undefined;
+      amount: undefined;
+    },
+    ""
+  > = yup.object().shape({
     email: yup.string().email("Email incorrect").required("Email is missing"),
     cardNumber: yup
       .string()
@@ -52,9 +71,9 @@ export default function From() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  //const [backendData, setBackendData] = useState({});
+  //  const [backendData, setBackendData] = useState({});
 
-  /*useEffect(() => {
+  /*  useEffect(() => {
     try {
       fetch("http://localhost:5000/api")
         .then((response) => response.json())
@@ -64,7 +83,7 @@ export default function From() {
     } catch (error) {
       console.log(error);
     }
-  }, []);*/
+  }, []); */
 
   async function onSubmit(data: any) {
     console.log(data);
@@ -113,6 +132,7 @@ export default function From() {
               type="text"
               autoComplete="none"
               placeholder="MM/YY"
+              /* eslint-disable-next-line react/jsx-props-no-spreading */
               {...register("expirationDate")}
             />
             <input
@@ -120,6 +140,7 @@ export default function From() {
               type="text"
               autoComplete="none"
               placeholder="CVC"
+              /* eslint-disable-next-line react/jsx-props-no-spreading */
               {...register("cvc")}
             />
           </div>

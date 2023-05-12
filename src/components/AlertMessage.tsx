@@ -5,7 +5,7 @@ interface AlertMessageProps {
 }
 
 export default function AlertMessage(props: AlertMessageProps) {
-  const inputError = props.inputError;
+  const { inputError } = props;
 
   return <p className="alert">{inputError?.message}</p>;
 }

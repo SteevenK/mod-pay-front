@@ -8,10 +8,10 @@ interface InputBoxProps {
   register: UseFormRegister<any>;
 }
 export default function InputBox(props: InputBoxProps) {
-  const title = props.title;
-  const registerType = props.registerType;
-  const placeholder = props.placeholder;
-  const register = props.register;
+  const { title } = props;
+  const { registerType } = props;
+  const { placeholder } = props;
+  const { register } = props;
 
   return (
     <div className="form-group">
@@ -21,6 +21,7 @@ export default function InputBox(props: InputBoxProps) {
         type="text"
         autoComplete="none"
         placeholder={placeholder}
+        /* eslint-disable-next-line react/jsx-props-no-spreading */
         {...register(registerType)}
       />
     </div>
