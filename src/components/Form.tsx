@@ -86,6 +86,7 @@ export default function From() {
   }, []); */
 
   async function onSubmit(data: any) {
+    // eslint-disable-next-line no-console
     console.log(data);
     try {
       await axios.put("http://localhost:5000/DB/findByCardNumber", data);
@@ -93,19 +94,25 @@ export default function From() {
       if (error.response) {
         // la requête a été faite et le code de réponse du serveur n’est pas dans
         // la plage 2xx
+        // eslint-disable-next-line no-console
         console.log(error.response.data);
+        // eslint-disable-next-line no-console
         console.log(error.response.status);
+        // eslint-disable-next-line no-console
         console.log(error.response.headers);
       } else if (error.request) {
         // la requête a été faite mais aucune réponse n’a été reçue
         // `error.request` est une instance de XMLHttpRequest dans le navigateur
         // et une instance de http.ClientRequest avec node.js
+        // eslint-disable-next-line no-console
         console.log(error.request);
       } else {
         // quelque chose s’est passé lors de la construction de la requête et cela
         // a provoqué une erreur
+        // eslint-disable-next-line no-console
         console.log("Error", error.message);
       }
+      // eslint-disable-next-line no-console
       console.log(error.config);
     }
   }
