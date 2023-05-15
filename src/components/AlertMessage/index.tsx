@@ -1,4 +1,5 @@
 import React from "react";
+import * as Style from "./styledComponent";
 
 interface AlertMessageProps {
   inputError: any;
@@ -7,5 +8,5 @@ interface AlertMessageProps {
 export default function AlertMessage(props: AlertMessageProps) {
   const { inputError } = props;
 
-  return <p className="alert">{inputError?.message}</p>;
+  return <Style.AlertMessage>{inputError?.message}</Style.AlertMessage>;
 }

@@ -1,11 +1,10 @@
 import React from "react";
+import * as Style from "./styledComponent";
 
 export default function PayButton() {
   return (
     <div>
-      <button className="form-group" type="submit">
-        Payer
-      </button>
+      <Style.PayButton>Payer</Style.PayButton>
     </div>
   );
 }

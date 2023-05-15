@@ -3,10 +3,14 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import AlertMessage from "./AlertMessage";
-import PayButton from "./PayButton";
-import InputBox from "./InputBox";
+import * as Style from "./styledComponent";
+import AlertMessage from "../AlertMessage";
+import PayButton from "../PayButton";
+import InputBox from "../InputBox";
+import InputBoxSmall from "../InputBoxSmall";
+import * as InlineInput from "../Inline/styledComponent";
 
+// Pour garder une trace de mes Use
 //  import { useState } from "react";
 //  import { useEffect } from "react";
 
@@ -36,7 +40,7 @@ export default function From() {
     },
     ""
   > = yup.object().shape({
-    email: yup.string().email("Email incorrect").required("Email is missing"),
+    email: yup.string().email("Email incorrect").required("Email incorrect"),
     cardNumber: yup
       .string()
       .min(16, "Numéro incorrect")
@@ -71,6 +75,7 @@ export default function From() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  //  Pour garder une trace de  mon UseEffect
   //  const [backendData, setBackendData] = useState({});
 
   /*  useEffect(() => {
@@ -86,7 +91,6 @@ export default function From() {
   }, []); */
 
   async function onSubmit(data: any) {
-    // eslint-disable-next-line no-console
     console.log(data);
     try {
       await axios.put("http://localhost:5000/DB/findByCardNumber", data);
@@ -94,31 +98,25 @@ export default function From() {
       if (error.response) {
         // la requête a été faite et le code de réponse du serveur n’est pas dans
         // la plage 2xx
-        // eslint-disable-next-line no-console
         console.log(error.response.data);
-        // eslint-disable-next-line no-console
         console.log(error.response.status);
-        // eslint-disable-next-line no-console
         console.log(error.response.headers);
       } else if (error.request) {
         // la requête a été faite mais aucune réponse n’a été reçue
         // `error.request` est une instance de XMLHttpRequest dans le navigateur
         // et une instance de http.ClientRequest avec node.js
-        // eslint-disable-next-line no-console
         console.log(error.request);
       } else {
         // quelque chose s’est passé lors de la construction de la requête et cela
         // a provoqué une erreur
-        // eslint-disable-next-line no-console
         console.log("Error", error.message);
       }
-      // eslint-disable-next-line no-console
       console.log(error.config);
     }
   }
 
   return (
-    <div className="app">
+    <Style.Form>
       <form onSubmit={handleSubmit(onSubmit)} action="/">
         <InputBox
           register={register}
@@ -132,26 +130,18 @@ export default function From() {
           placeholder="1234123412341234"
           registerType="cardNumber"
         />
-        <div className="form-group">
-          <div className="inline">
-            <input
-              className="inputboxShort1"
-              type="text"
-              autoComplete="none"
-              placeholder="MM/YY"
-              /* eslint-disable-next-line react/jsx-props-no-spreading */
-              {...register("expirationDate")}
-            />
-            <input
-              className="inputboxShort2"
-              type="text"
-              autoComplete="none"
-              placeholder="CVC"
-              /* eslint-disable-next-line react/jsx-props-no-spreading */
-              {...register("cvc")}
-            />
-          </div>
-        </div>
+        <InlineInput.Inline>
+          <InputBoxSmall
+            registerType="expirationDate"
+            placeholder="MM/YY"
+            register={register}
+          />
+          <InputBoxSmall
+            registerType="cvc"
+            placeholder="123"
+            register={register}
+          />
+        </InlineInput.Inline>
         <InputBox
           register={register}
           title="Porteur de la carte"
@@ -172,6 +162,6 @@ export default function From() {
         <AlertMessage inputError={errors.name} />
         <AlertMessage inputError={errors.amount} />
       </form>
-    </div>
+    </Style.Form>
   );
 }

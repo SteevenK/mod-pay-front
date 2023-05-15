@@ -1,5 +1,7 @@
 import React from "react";
 import { UseFormRegister } from "react-hook-form";
+import * as Style from "./styledComponent";
+import BoxTitle from "../BoxTitle";
 
 interface InputBoxProps {
   title: string;
@@ -14,9 +16,9 @@ export default function InputBox(props: InputBoxProps) {
   const { register } = props;
 
   return (
-    <div className="form-group">
-      <p className="boxtitle">{title} :</p>
-      <input
+    <Style.InputBox>
+      <BoxTitle title={title} />
+      <Style.Input
         className="inputboxLong"
         type="text"
         autoComplete="none"
@@ -24,6 +26,6 @@ export default function InputBox(props: InputBoxProps) {
         /* eslint-disable-next-line react/jsx-props-no-spreading */
         {...register(registerType)}
       />
-    </div>
+    </Style.InputBox>
   );
 }
