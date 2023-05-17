@@ -123,23 +123,27 @@ export default function From() {
           title="Adresse email"
           placeholder="Email"
           registerType="email"
+          error={!!errors.email}
         />
         <InputBox
           register={register}
           title="Informations sur la carte"
           placeholder="1234123412341234"
           registerType="cardNumber"
+          error={!!errors.cardNumber}
         />
         <InlineInput.Inline>
           <InputBoxSmall
             registerType="expirationDate"
             placeholder="MM/YY"
             register={register}
+            error={!!errors.expirationDate}
           />
           <InputBoxSmall
             registerType="cvc"
             placeholder="123"
             register={register}
+            error={!!errors.cvc}
           />
         </InlineInput.Inline>
         <InputBox
@@ -147,12 +151,14 @@ export default function From() {
           title="Porteur de la carte"
           placeholder="Nom"
           registerType="name"
+          error={!!errors.name}
         />
         <InputBox
           register={register}
           title="Montant"
           placeholder="Montant"
           registerType="amount"
+          error={!!errors.amount}
         />
         <PayButton />
         <AlertMessage inputError={errors.email} />

@@ -7,4 +7,7 @@ export const PayButton = styled.button`
   font-size: 20px;
   border: none;
   background-color: rgb(150, 150, 150);
+  &:hover {
+    background-color: dimgray;
+  }
 `;

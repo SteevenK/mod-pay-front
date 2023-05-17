@@ -8,18 +8,20 @@ interface InputBoxProps {
   registerType: string;
   placeholder: string;
   register: UseFormRegister<any>;
+  error: boolean;
 }
 export default function InputBox(props: InputBoxProps) {
   const { title } = props;
   const { registerType } = props;
   const { placeholder } = props;
   const { register } = props;
+  const { error } = props;
 
   return (
     <Style.InputBox>
       <BoxTitle title={title} />
       <Style.Input
-        className="inputboxLong"
+        error={error}
         type="text"
         autoComplete="none"
         placeholder={placeholder}

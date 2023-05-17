@@ -6,14 +6,17 @@ interface InputBoxProps {
   registerType: string;
   placeholder: string;
   register: UseFormRegister<any>;
+  error: boolean;
 }
-export default function InputBoxSmall(props: InputBoxProps) {
-  const { registerType } = props;
-  const { placeholder } = props;
-  const { register } = props;
-
+export default function InputBoxSmall({
+  registerType,
+  placeholder,
+  register,
+  error,
+}: InputBoxProps) {
   return (
     <Style.InputBoxSmall
+      error={error}
       type="text"
       autoComplete="none"
       placeholder={placeholder}
